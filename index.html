@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetCare Pro - Veterinary Health Management</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-heart"></i>
+                <span>VetCare Pro</span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#features">Features</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Manage Your Pet's Health, <span class="accent-text">Effortlessly</span></h1>
+                    <p>Comprehensive veterinary health management system designed for modern pet care. Keep track of medical records, schedule check-ups, and ensure your pets stay healthy.</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="showLoginModal()">Get Started</button>
+                        <button class="btn-secondary">Learn More</button>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.pexels.com/photos/4587998/pexels-photo-4587998.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Happy pets">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Everything You Need for Pet Health Management</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Records</h3>
+                    <p>Keep all medical records safe and organized in one secure location.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-check"></i>
+                    <h3>Smart Reminders</h3>
+                    <p>Never miss important check-ups with automated health reminders.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Multi-User Access</h3>
+                    <p>Separate dashboards for veterinarians and pet owners.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-images"></i>
+                    <h3>Photo Management</h3>
+                    <p>Upload and manage photos for comprehensive animal profiles.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to VetCare Pro</h2>
+                <span class="close" onclick="hideLoginModal()">&times;</span>
+            </div>
+            
+            <!-- Login Type Selection -->
+            <div class="login-type-selection" id="loginTypeSelection">
+                <div class="login-type-card" onclick="showLoginForm('vet')">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Veterinarian Login</h3>
+                    <p>Access professional dashboard</p>
+                </div>
+                <div class="login-type-card" onclick="showLoginForm('owner')">
+                    <i class="fas fa-user"></i>
+                    <h3>Pet Owner Login</h3>
+                    <p>Manage your pet's health</p>
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <div class="login-form-container" id="loginFormContainer" style="display: none;">
+                <button class="back-btn" onclick="showLoginTypeSelection()">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                
+                <form class="login-form" id="loginForm">
+                    <h3 id="loginTitle">Veterinarian Login</h3>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-full">Login</button>
+                    
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register here</a></p>
+                    </div>
+                </form>
+
+                <!-- Registration Form -->
+                <form class="register-form" id="registerForm" style="display: none;">
+                    <h3 id="registerTitle">Register as Veterinarian</h3>
+                    
+                    <div class="form-group">
+                        <label for="regName">Full Name</label>
+                        <input type="text" id="regName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regEmail">Email</label>
+                        <input type="email" id="regEmail" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regPassword">Password</label>
+                        <input type="password" id="regPassword" name="password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="regConfirmPassword">Confirm Password</label>
+                        <input type="password" id="regConfirmPassword" name="confirmPassword" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary btn-full">Register</button>
+                    
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" onclick="showLoginForm()">Login here</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="nav-brand">
+                        <i class="fas fa-heart"></i>
+                        <span>VetCare Pro</span>
+                    </div>
+                    <p>Professional veterinary health management for the modern age.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-envelope"></i> info@vetcarepro.com</p>
+                    <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 VetCare Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

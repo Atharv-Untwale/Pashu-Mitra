@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetCare Pro - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Dashboard Header -->
+    <header class="dashboard-header">
+        <div class="container">
+            <div class="dashboard-nav">
+                <div class="nav-brand">
+                    <i class="fas fa-heart"></i>
+                    <span>VetCare Pro</span>
+                </div>
+                <div class="nav-items">
+                    <div class="user-info">
+                        <span id="userWelcome">Welcome, Dr. Smith</span>
+                        <span id="userType" class="user-type">Veterinarian</span>
+                    </div>
+                    <button class="btn-logout" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Navigation -->
+    <nav class="dashboard-nav-menu">
+        <div class="container">
+            <ul class="nav-tabs">
+                <li class="nav-tab active" onclick="showSection('animals')">
+                    <i class="fas fa-paw"></i> Animals
+                </li>
+                <li class="nav-tab" onclick="showSection('reminders')">
+                    <i class="fas fa-bell"></i> Reminders
+                </li>
+                <li class="nav-tab" onclick="showSection('reports')">
+                    <i class="fas fa-chart-bar"></i> Reports
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- Animals Section -->
+            <section id="animalsSection" class="dashboard-section active">
+                <div class="section-header">
+                    <h2>Animal Management</h2>
+                    <button class="btn-primary" onclick="showAddAnimalModal()">
+                        <i class="fas fa-plus"></i> Add New Animal
+                    </button>
+                </div>
+
+                <!-- Animals Grid -->
+                <div class="animals-grid" id="animalsGrid">
+                    <!-- Animal cards will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Reminders Section -->
+            <section id="remindersSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Health Check Reminders</h2>
+                    <button class="btn-primary" onclick="showAddReminderModal()">
+                        <i class="fas fa-plus"></i> Add Reminder
+                    </button>
+                </div>
+
+                <div class="reminders-list" id="remindersList">
+                    <!-- Reminders will be dynamically generated here -->
+                </div>
+            </section>
+
+            <!-- Reports Section -->
+            <section id="reportsSection" class="dashboard-section">
+                <div class="section-header">
+                    <h2>Health Reports & Statistics</h2>
+                </div>
+
+                <div class="reports-grid">
+                    <div class="report-card">
+                        <h3>Total Animals</h3>
+                        <div class="report-number" id="totalAnimals">0</div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Healthy Animals</h3>
+                        <div class="report-number healthy" id="healthyAnimals">0</div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Needs Attention</h3>
+                        <div class="report-number warning" id="needsAttention">0</div>
+                    </div>
+                    <div class="report-card">
+                        <h3>Upcoming Reminders</h3>
+                        <div class="report-number info" id="upcomingReminders">0</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Add/Edit Animal Modal -->
+    <div id="animalModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="animalModalTitle">Add New Animal</h2>
+                <span class="close" onclick="hideAnimalModal()">&times;</span>
+            </div>
+            
+            <form class="animal-form" id="animalForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animalName">Animal Name</label>
+                        <input type="text" id="animalName" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animalType">Type</label>
+                        <select id="animalType" name="type" required>
+                            <option value="">Select Type</option>
+                            <option value="Dog">Dog</option>
+                            <option value="Cat">Cat</option>
+                            <option value="Bird">Bird</option>
+                            <option value="Rabbit">Rabbit</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="animalAge">Age (years)</label>
+                        <input type="number" id="animalAge" name="age" min="0" max="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="healthCondition">Health Condition</label>
+                        <select id="healthCondition" name="healthCondition" required>
+                            <option value="">Select Condition</option>
+                            <option value="Healthy">Healthy</option>
+                            <option value="Monitoring">Monitoring</option>
+                            <option value="Needs Check-up">Needs Check-up</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerName">Owner Name</label>
+                    <input type="text" id="ownerName" name="ownerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="ownerContact">Owner Contact</label>
+                    <input type="tel" id="ownerContact" name="ownerContact" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="medicalNotes">Medical Notes</label>
+                    <textarea id="medicalNotes" name="medicalNotes" rows="4" placeholder="Enter any relevant medical information..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="hideAnimalModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Animal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Animal Detail Modal -->
+    <div id="animalDetailModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2 id="animalDetailTitle">Animal Details</h2>
+                <span class="close" onclick="hideAnimalDetailModal()">&times;</span>
+            </div>
+            
+            <div class="animal-detail-content" id="animalDetailContent">
+                <!-- Animal details will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Reminder Modal -->
+    <div id="reminderModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Health Reminder</h2>
+                <span class="close" onclick="hideReminderModal()">&times;</span>
+            </div>
+            
+            <form class="reminder-form" id="reminderForm">
+                <div class="form-group">
+                    <label for="reminderAnimal">Select Animal</label>
+                    <select id="reminderAnimal" name="animalId" required>
+                        <option value="">Select Animal</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminderType">Reminder Type</label>
+                    <select id="reminderType" name="type" required>
+                        <option value="">Select Type</option>
+                        <option value="Vaccination">Vaccination</option>
+                        <option value="Check-up">Check-up</option>
+                        <option value="Medication">Medication</option>
+                        <option value="Dental Care">Dental Care</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminderDate">Reminder Date</label>
+                    <input type="date" id="reminderDate" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="reminderNotes">Notes</label>
+                    <textarea id="reminderNotes" name="notes" rows="3" placeholder="Additional notes..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="hideReminderModal()">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Reminder</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
